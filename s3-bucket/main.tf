@@ -27,32 +27,6 @@ resource "aws_s3_bucket" "bucket" {
     }
 }
 
-resource "aws_s3_bucket_policy" "bucket-policy" {
-    for_each = aws_s3_bucket.bucket
-    bucket = "${each.value.id}"
-
-    policy = <<POLICY
-{
-"Id": "SSLBucketAcessPolicy",
-"Version": "2012-10-17",
-"Statement": [
-    {
-    "Sid": "DenyWithoutSSL",
-    "Action": "s3:*",
-    "Effect": "Deny",
-    "Resource": "${each.value.arn}/*",
-    "Condition": {
-        "Bool": {
-            "aws:SecureTransport": "false"
-        }
-    },
-    "Principal": "*"
-    }
-]
-}
-POLICY
-}
-
 resource "aws_s3_bucket_public_access_block" "block" {
   for_each = aws_s3_bucket.bucket
   bucket = "${each.value.id}"
