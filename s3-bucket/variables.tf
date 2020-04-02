@@ -23,3 +23,7 @@ variable "s3_bucket_names" {
     description = "Name of the buckets to be created"
     type        = list(string)
 }
+
+variable "cors_rule" {
+    description = "Cors rules "
+}
