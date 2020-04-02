@@ -17,6 +17,8 @@ resource "aws_s3_bucket" "bucket" {
         Project = "${var.project_name}"
         Environment = "${var.environment}"
     }
+
+    cors_rule = "${var.cors_rule}"
     
     server_side_encryption_configuration {
         rule {
