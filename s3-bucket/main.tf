@@ -18,6 +18,16 @@ resource "aws_s3_bucket" "bucket" {
         Environment = "${var.environment}"
     }
 
+    dynamic "cors_rule" {
+      for_each = lookup(var.cors_rules,each.value,[])
+      content {    
+				allowed_headers = cors_rule.value.allowed_headers
+    		allowed_methods = cors_rule.value.allowed_methods
+    		allowed_origins = cors_rule.value.allowed_origins
+    		expose_headers  = cors_rule.value.expose_headers
+    		max_age_seconds = cors_rule.value.max_age_seconds
+      }
+    }
     cors_rule = "${var.cors_rule}"
     
     server_side_encryption_configuration {
