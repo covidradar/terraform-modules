@@ -28,7 +28,6 @@ resource "aws_s3_bucket" "bucket" {
     		max_age_seconds = cors_rule.value.max_age_seconds
       }
     }
-    cors_rule = "${var.cors_rule}"
     
     server_side_encryption_configuration {
         rule {
