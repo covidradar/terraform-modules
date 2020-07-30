@@ -2,16 +2,7 @@ variable "s3_bucket_prefix" {
     description = "Prefix that will be append to all S3 buckets names."
     type        = string
 }
-variable "cors_rules" {
-  type = map(object({
-    allowed_headers=list(string)
-    allowed_methods=list(string)
-    allowed_origins=list(string)
-    expose_headers=list(string)
-    max_age_seconds=number
-  }))
-    
-}
+
 variable "project_name" {
     description = "Project current using that bucket"
     type        = string
